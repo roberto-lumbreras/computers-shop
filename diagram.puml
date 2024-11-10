@@ -1,0 +1,42 @@
+@startuml computers-shop
+entity Computer {
+    - Long id
+    - BigDecimal price
+    - String brand
+    - Integer memorySizeGigabytes
+    - String processor
+    - String operativeSystem
+}
+entity Shop {
+    - Long id
+    - String name
+    - String owner
+    - String nif
+}
+interface ComputerRepository{
+    + List<Computer> findByBrand(String brand)
+}
+interface JpaRepository<Long,Computer>
+class ComputerService {
+    + List<Computer> getAll()
+    + Computer create(Computer computer)
+    + List<Computer> findByBrand(String brand)
+    + Integer deleteByBrand(String brand)
+}
+class ComputerController {
+    + ResponseEntity<Computer> create(Computer computer)
+    + ResponseEntity<Void> deleteByBrand(String brand)
+    + ResponseEntity<List<Computer>> getComputers(String brand = null)
+}
+class ComputersShopApplication {
+	+ {static} void main(String[] args)
+}
+class GlobalExceptionHandler {
+    + ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e)
+    + ResponseEntity<String> handleIllegaArgumentException(IllegalArgumentException e)
+}  
+ComputerController ..|> ComputerService
+ComputerService ..|> ComputerRepository
+ComputerRepository ..|> Computer
+ComputerRepository --|> JpaRepository
+@enduml

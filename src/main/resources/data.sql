@@ -5,3 +5,5 @@ INSERT INTO computers (price, brand, memory_size_gigabytes, processor, operative
 (599.99, 'Lenovo', 16, 'Intel Core i5', 'Windows 10'),
 (499.00, 'Acer', 4, 'Intel Celeron', 'Chrome OS'),
 (849.75, 'Asus', 16, 'Intel Core i7', 'Windows 10');
+
+INSERT INTO shop (name,owner,nif) VALUES ('TecnoBits','Javier Martínez Pérez','B1234567A')

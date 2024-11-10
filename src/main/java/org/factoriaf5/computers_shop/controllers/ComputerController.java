@@ -5,6 +5,7 @@ import java.util.List;
 import org.factoriaf5.computers_shop.models.Computer;
 import org.factoriaf5.computers_shop.services.ComputerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +23,8 @@ public class ComputerController {
 
     @PostMapping
     public ResponseEntity<Computer> create(@RequestBody Computer computer){
-        Computer updatedComputer = service.create(computer);
-        return updatedComputer!=null?
-        ResponseEntity.ok(updatedComputer):
-        ResponseEntity.badRequest().build();
+        Computer createdComputer = service.create(computer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdComputer);
     }
 
     @DeleteMapping
